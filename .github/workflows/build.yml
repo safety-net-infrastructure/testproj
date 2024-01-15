@@ -1,0 +1,25 @@
+---
+name: Build Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '[0-9][0-9].[0-9]+.[0-9]+'
+  pull_request:
+  merge_group:
+
+jobs:
+  package_and_publish:
+    name: publish_step
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    env:
+      MY_SECRET: ${{ secrets.MY_SECRET }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: run_test
+        run: echo "just a test"
